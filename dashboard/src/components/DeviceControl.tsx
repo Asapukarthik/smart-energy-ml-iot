@@ -14,6 +14,8 @@ export default function DeviceControl() {
 
     useEffect(() => {
         load()
+        const interval = setInterval(load, 2000)
+        return () => clearInterval(interval)
     }, [])
 
     const load = async () => {

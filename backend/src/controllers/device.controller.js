@@ -1,8 +1,10 @@
 const Device = require("../models/device.model");
+const User = require("../models/user.model");
 
 exports.updateDevice = async (req, res) => {
     // Only admin can change device state
-    if (req.user.role !== "admin") {
+    const user = await User.findById(req.user.id);
+    if (!user || user.role !== "admin") {
         return res.status(403).json({
             success: false,
             message: "Access denied. Only admin can operate devices."
